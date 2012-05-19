@@ -1,6 +1,6 @@
-#﻿Authenticated methods in the Bookboon.com API
+#﻿Authenticated methods in the bookboon.com API
  
-Specific parts of the API requires are only available to authorized application. To access these methods, you will need to obtain a API key from the BookBooN.com crew. Once you have an API key, you are ready to roll.
+Specific parts of the API requires are only available to authorized application. To access these methods, you will need to obtain a API key from the bookboon.com crew. Once you have an API key, you are ready to roll.
 
 ##User profiles
 
@@ -65,7 +65,7 @@ All questions are provided with a fixed set of possible answers. When the user h
 
 Depending on the selected answers, a number of followup questions may be returned. Repeat the process of asking questions and submitting them until you receive an empty array when invoking the `/questions` resource.
 
-Currently, no combination of answers will generate more than five questions in total, including those asked initially. We intend to enforce this limit in the future, and you are encouraged to communicate a maximum of five questions visually to your users. See the download form on [BookBooN.com](http://bookboon.com/) for an example.
+Currently, no combination of answers will generate more than five questions in total, including those asked initially. We intend to enforce this limit in the future, and you are encouraged to communicate a maximum of five questions visually to your users. See the download form on [bookboon.com](http://bookboon.com/) for an example.
 
 > **Note:** While most questions will make a fit for a drop down list, with 2-10 possible answers, a few questions will have as many as 100+ possible answers. Depending on your platform, you might want to consider some sort of auto-completing text box or similar for such questions.
 
