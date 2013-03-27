@@ -1,13 +1,14 @@
-#﻿Public methods in the BookBooN.com API
+#﻿Public methods in the bookboon.com API
 
 The public API contains a number of read-only methods, allowing you to build an application fetching categories, books and search results.
 
 ##Support for different languages
 
-All areas of the public API accepts an optional query string parameter `lang`. If present, the parameter will be taken as a hint for the preferred language of the user, and we will try to deliever content in this language.
+All areas of the public API accepts an optional query string parameter `lang`. If present, the parameter will be taken as a hint for the preferred language of the user, and we will try to deliver content in this language.
 
-Currently, most of our content is available in the following eight languages:
+Currently, most of our content is available in the following eleven languages:
 
+  * Chinese = cn
   * Danish = da
   * Dutch = nl
   * English = en
@@ -15,13 +16,15 @@ Currently, most of our content is available in the following eight languages:
   * French = fr
   * German = de
   * Norwegian = nb
+  * Spanish = es
   * Swedish = sv
+  * Czech = cs
 
 If you design your application to support any other language(s), do pass the relevant [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code along in the `lang` parameter. If we do not have translations for your language, we will fallback to English. If we later add translations for the language, no change is required on your end to start receiving localized data.
 
 ##Categories
 
-As reflected on BookBooN.com, our books are organized into a hierarchy. Traversing the category tree begins here: http://api.bookboon.com/categories
+As reflected on bookboon.com, our books are organized into a hierarchy. Traversing the category tree begins here: http://api.bookboon.com/categories
 
 Categories are returned as an array of objects with properties as follows:
 
@@ -40,6 +43,7 @@ This will give you an expanded view of the selected category
     - `title`
     - `thumbnail`
     - `language`
+    - `published`
 
 A category may contain either sub categories, books or both.
 

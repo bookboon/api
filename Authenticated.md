@@ -1,6 +1,6 @@
-#﻿Authenticated methods in the Bookboon.com API
+#﻿Authenticated methods in the bookboon.com API
  
-Specific parts of the API requires are only available to authorized application. To access these methods, you will need to obtain a API key from the BookBooN.com crew. Once you have an API key, you are ready to roll.
+Specific parts of the API requires are only available to authorized application. To access these methods, you will need to obtain a API key from the bookboon.com crew. Once you have an API key, you are ready to roll.
 
 ##User profiles
 
