@@ -85,11 +85,11 @@ __Raw__:
 	]
 
 ## /books/`<guid>`/download
-__Status__: Authenticated
-__Method__: POST
-__Variables__: `rotation` -- guid for specific rotation to be printed in the PDF,
-`branding` -- guid for branding (cover page) to be printed in the PDF
-__Output__: `url` -- url where the PDF can be retrieved
+__Status__: Authenticated  
+__Method__: POST  
+__Variables__: `rotation` -- guid for specific rotation to be printed in the PDF,  
+`branding` -- guid for branding (cover page) to be printed in the PDF  
+__Output__: `url` -- url where the PDF can be retrieved  
 
 __Raw__:
 	[ 
@@ -97,12 +97,12 @@ __Raw__:
 	]
 
 # /questions
-__Status__: Authenticated
-__Method__: POST
-__Variables__: `lang`  -- ISO 639-1 Language code,
-`all` -- output will contain all previously answered questions with `"selected": true`
-`answer` -- post back variable for answers received.
-__Output__: array [ `question` -- question text to display, answers [ `id` -- answer guid to post back, `text` -- answer text to display ] ] 
+__Status__: Authenticated  
+__Method__: POST  
+__Variables__: `lang`  -- ISO 639-1 Language code,  
+`all` -- output will contain all previously answered questions with `"selected": true`  
+`answer` -- post back variable for answers received.  
+__Output__: array [ `question` -- question text to display, answers [ `id` -- answer guid to post back, `text` -- answer text to display ] ]   
 
 __Raw__:
 	[ 
@@ -116,10 +116,10 @@ __Raw__:
 
 
 # /recommendations
-__Status__: Authenticated
-__Method__: GET
-__Variables__: `lang`  -- ISO 639-1 Language code
-__Output__:  array[ `id` -- guid for book, `title` -- name of book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ] ]
+__Status__: Authenticated  
+__Method__: GET  
+__Variables__: `lang`  -- ISO 639-1 Language code  
+__Output__:  array[ `id` -- guid for book, `title` -- name of book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ] ]  
 
 __Raw__:
 	[ 
