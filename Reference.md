@@ -85,7 +85,6 @@ __Raw__:
 	]
 
 ## /books/`<guid>`/download
-<<<<<<< HEAD
 __Status__: Authenticated
 __Method__: POST
 __Variables__: `rotation` -- guid for specific rotation to be printed in the PDF,
@@ -103,23 +102,6 @@ __Method__: POST
 __Variables__: `lang`  -- ISO 639-1 Language code,
 `all` -- output will contain all previously answered questions with `"selected": true`
 `answer` -- post back variable for answers received.
-=======
-__Status__: Autenticated  
-__Method__: POST  
-__Variables__: *none*  
-__Output__: `url` -- url where the PDF can be retrieved  
-
-__Raw__:  
-	[   
-		{"url":"http://url.to.pdf.file"}  
-	]  
-
-# /questions  
-__Status__: Autenticated  
-__Method__: POST  
-__Variables__: `lang`  -- ISO 639-1 Language code,  
-`answer` -- post back variable for answers received.  
->>>>>>> 3c0d02fa882303e5008ae099936a6aa1eb4c5b68
 __Output__: array [ `question` -- question text to display, answers [ `id` -- answer guid to post back, `text` -- answer text to display ] ] 
 
 __Raw__:
