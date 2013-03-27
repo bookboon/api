@@ -65,7 +65,7 @@ All questions are provided with a fixed set of possible answers. When the user h
 
 Depending on the selected answers, a number of followup questions may be returned. Repeat the process of asking questions and submitting them until you receive an empty array when invoking the `/questions` resource.
 
-Currently, no combination of answers will generate more than five questions in total, including those asked initially. We intend to enforce this limit in the future, and you are encouraged to communicate a maximum of five questions visually to your users. See the download form on [BookBooN.com](http://bookboon.com/) for an example.
+Currently, no combination of answers will generate more than five questions in total, including those asked initially. We intend to enforce this limit in the future, and you are encouraged to communicate a maximum of five questions visually to your users. See the download form on [bookboon.com](http://bookboon.com/) for an example.
 
 > **Note:** While most questions will make a fit for a drop down list, with 2-10 possible answers, a few questions will have as many as 100+ possible answers. Depending on your platform, you might want to consider some sort of auto-completing text box or similar for such questions.
 
@@ -94,6 +94,8 @@ If it happens that you have not yet provided us with answers for all of our ques
 In that case, you must make a new call to `/questions` and continue with the question asking process from here. As soon as you get to an empty array of questions, the profile will be unblocked and you can proceed with the download.
 
 > **Note:** HTTP status code 403 may have other causes than profile incompleteness. While you can, and should, use `status_code != 200` to detect if the request has succeeded, in the case of an error, you should proceed to test if `error == 'ProfileIncomplete'`. This token is a certain indicator of the problem at hand.
+
+To enable developers to customize the books the download method takes two parameters `branding` and `rotation`. They should be posted with every download. They are both GUID types and are provided by Bookboon if relevant.
 
 ##Retrieving recommendations
 
