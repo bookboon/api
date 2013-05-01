@@ -56,6 +56,7 @@ __Output__:  array[ `title` -- name of book, `authors` -- authors of the book, `
 __Raw__:
 	[   
 		{"title": "Excel 2010 Introduction: Part I",  
+		"subtitle": null,  
 		"authors": "Stephen Moffat, The Mouse Training Company",  
 		"isbn": "978-87-7681-804-3",  
 		"edition": 1,  
@@ -63,6 +64,12 @@ __Raw__:
 		"language": {  
 			"code": "en",  
 			"name": "English"  
+		},  
+		"published": "2011-07-07T00:00:00",  
+		"abstract": "This free Excel 2010 eBook should be used as a point of reference after following attendance of the advanced level Excel 2010 training course.",  
+		"rating": {  
+			"average": 4.1641998291015625,  
+			"count": 134  
 		},  
 		detail: [{  
 			"title": "Description"  
@@ -83,6 +90,13 @@ __Raw__:
 		],  
 		"pages": 128}  
 	]
+
+## /books/`<guid>`/thumbnail
+__Status__: Public  
+__Method__: GET  
+__Variables__: `width` -- width in pixel of returned thumbnail. Accepted value 90, 120, 210 and 380,  
+`branding` -- guid for branding (cover page) to be printed in the PDF  
+__Output__: binary jpeg image
 
 ## /books/`<guid>`/download
 __Status__: Authenticated  

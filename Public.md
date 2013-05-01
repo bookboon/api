@@ -31,7 +31,7 @@ Categories are returned as an array of objects with properties as follows:
   * `id` : unique identifier for the category
   * `name` : a short name for the category to be displayed in menus or the like
 
-In order to query for contents of a category, make a new request with the `id` appended to the URL. Example: http://api.bookboon.com/categories/412e64e2-0965-e011-bd88-22a08ed629e5
+In order to query for contents of a category, make a new request with the `id` appended to the URL. Example: http://api.bookboon.com/categories/ab0f00ac-7749-4500-a808-a16200fca2f6
 
 This will give you an expanded view of the selected category
 
@@ -44,11 +44,10 @@ This will give you an expanded view of the selected category
     - `thumbnail`
     - `language`
     - `published`
+    - `abstact`
+    - `rating`
 
-A category may contain either sub categories, books or both.
-
-> **Note:** While the category tree currently has a fixed height of two, you should not rely on this in your application design. As the number of books available at BookBooN.com grows, we might have to introduce additional layers in some areas of the tree.
-
+A category may contain either sub categories, books or both. The `lang` parameter will determine language of the category name and also whether to include books in that language. English will always be shown no matter the locale.
 
 ##Books
 
