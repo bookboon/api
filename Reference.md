@@ -1,59 +1,69 @@
-# /categories
-__Status__: Public  
-__Method__: GET  
-__Variables__:  `lang`  -- ISO 639-1 Language code  
-__Output__: array [ `id` -- guid for category, `name` -- name of category ]  
+# HTTP Headers
 
-__Raw__:  
-	[ 
-		{"id":"6ec2991a-d6b2-e011-b817-22a08ed629e5","name":"Travel guides"},  
-		{"id":"6dc2991a-d6b2-e011-b817-22a08ed629e5","name":"Textbooks"},  
-		{"id":"6cc2991a-d6b2-e011-b817-22a08ed629e5","name":"Business"}  
+All API calls will accept the following HTTP request headers:
+
+`Accept-Language` : Set to ISO-631-1 country codes, see the [API page](https://github.com/bookboon/api/blob/master/API.md) 
+
+`X-Bookboon-Branding` : Override cover on book. GUID given by from bookboon if relevant
+
+`X-Bookboon-Rotation` : Override adverts in book. GUID given by from bookboon if relevant
+
+# /categories 
+__Method__: GET  
+__Variables__: *none*  
+__Output__: array [ `_id` -- guid for category, `_link` -- link to api object, `name` -- name of category, `description` -- description of category content, `homepage` -- link the category on bookboon.com ]  
+
+__Example__:  
+`	[
+		{ _id:"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      _link:"http://...",   
+      name:"xxxxxx",   
+      description:"...",  
+      homepage:"http://..." }  
 	]
-
-## /categories/`<guid>`
-__Status__: Public  
+`
+## /categories/`<guid>` 
 __Method__: GET  
-__Variables__:  `lang`  -- ISO 639-1 Language code  
-__Output__: `name` -- name of the section,  
+__Variables__:  *none*  
+__Output__: `name` -- name of the category,  
 `title` -- subtitle
 `description` -- long description of contents
-categories [ `id` -- guid for category, `name` -- name of category ],
-books [ `id` -- guid for book,
+categories [ `_id` -- guid for category, `name` -- name of category ],
+books [ `_id` -- guid for book,
 `name` --
 
-__Raw__:
+__Example__:
+`
 	{
 		"name":"Textbooks","title":"Download free textbooks online","description":"long description text",  
 		"categories":  
 		[  
-				{"id":"3e2e64e2-0965-e011-bd88-22a08ed629e5","name":"Accounting"}, ....  
+				{"_id":"3e2e64e2-0965-e011-bd88-22a08ed629e5","name":"Accounting"}, ....  
 		],  
 		"books":[]  
 	}
-
+`
 # /search
-__Status__: Public  
 __Method__: GET  
-__Variables__: `lang`  -- ISO 639-1 Language code  
-`q`  -- Search string 
-__Output__:  array[ `id` -- guid for book, `title` -- name of book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ] ]  
+__Variables__: `q`  -- Search string  
+__Output__:  array[ `_id` -- guid for book, `title` -- name of book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ] ]  
 
-__Raw__:  
+__Example__:  
+`
 	[   
-		{"id":"d2d5ee13-0f5e-e011-bd88-22a08ed629e5","title":"Essentials of Macroeconomics:Exercises",  
+		{"_id":"d2d5ee13-0f5e-e011-bd88-22a08ed629e5","title":"Essentials of Macroeconomics:Exercises",  
 		"thumbnail":"http://bookboon.com/uk/textbooks/macroeconimics-exercisebook.180.jpg",  
 		"language":{"code":"en","name":"English"}},  
 		....  
 	]  
-
+`
 # /books/`<guid>`
-__Status__: Public  
 __Method__: GET  
 __Variables__: *none*  
 __Output__:  array[ `title` -- name of book, `authors` -- authors of the book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ], `pages` -- page count ]  
 
-__Raw__:
+__Example__:   
+`
 	[   
 		{"title": "Excel 2010 Introduction: Part I",  
 		"subtitle": null,  
@@ -90,56 +100,41 @@ __Raw__:
 		],  
 		"pages": 128}  
 	]
+`
 
-## /books/`<guid>`/thumbnail
-__Status__: Public  
-__Method__: GET  
-__Variables__: `width` -- width in pixel of returned thumbnail. Accepted value 90, 120, 210 and 380,  
-`branding` -- guid for branding (cover page) to be printed in the PDF  
-__Output__: binary jpeg image
-
-## /books/`<guid>`/download
-__Status__: Authenticated  
+## /books/`<guid>`/download 
 __Method__: POST  
-__Variables__: `rotation` -- guid for specific rotation to be printed in the PDF,  
-`branding` -- guid for branding (cover page) to be printed in the PDF  
-__Output__: `url` -- url where the PDF can be retrieved  
+__Variables__: *none*   
+__Output__: 302 Redirect
 
-__Raw__:
-	[ 
-		{"url":"http://url.to.pdf.file"}
-	]
-
-# /questions
-__Status__: Authenticated  
+# /questions  
 __Method__: POST  
-__Variables__: `lang`  -- ISO 639-1 Language code,  
-`all` -- output will contain all previously answered questions with `"selected": true`  
-`answer` -- post back variable for answers received.  
-__Output__: array [ `question` -- question text to display, answers [ `id` -- answer guid to post back, `text` -- answer text to display ] ]   
+__Variables__: `answer` -- post back variable for answers received.  
+__Output__: array [ `question` -- question text to display, answers [ `_id` -- answer guid to post back, `text` -- answer text to display ] ]   
 
-__Raw__:
+__Example__:  
+`
 	[ 
 		{"question":"You are in",  
 		"answers":[  
-			{"id":"ee82be8a-c04b-e011-bd88-22a08ed629e5","text":"United Kingdom"},  
+			{"_id":"ee82be8a-c04b-e011-bd88-22a08ed629e5","text":"United Kingdom"},  
 			.....  
 		]  
 	]
-
+`
 
 
 # /recommendations
-__Status__: Authenticated  
 __Method__: GET  
-__Variables__: `lang`  -- ISO 639-1 Language code  
-__Output__:  array[ `id` -- guid for book, `title` -- name of book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ] ]  
+__Variables__: `books` -- give recommendation based on these books  
+__Output__:  array[ `_id` -- guid for book, `title` -- name of book, `thumbnail` -- url to thumbnail picture , language [ `code` -- short name,  `name` -- proper country name ] ]  
 
-__Raw__:
+__Example__:   
+`
 	[ 
-		{"id":"c7d5ee13-0f5e-e011-bd88-22a08ed629e5",  
+		{"_id":"c7d5ee13-0f5e-e011-bd88-22a08ed629e5",  
 		"title":"Long-Term Assets",  
 		"thumbnail":"http://bookboon.com/uk/textbooks/long-term-assets.180.jpg",  
 		"language":{"code":"en","name":"English"}}, ...  
 	]
-
+`

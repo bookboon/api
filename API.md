@@ -1,6 +1,68 @@
-#﻿Authenticated methods in the bookboon.com API
+#Methods in the bookboon.com API
  
-Specific parts of the API requires are only available to authorized application. To access these methods, you will need to obtain a API key from the bookboon.com crew. Once you have an API key, you are ready to roll.
+##Support for different languages
+
+All areas of the API accepts an optional header string parameter `Accept-Language`. If present the parameter will be taken as a hint for the preferred language of the user and we will try to deliver content in this language.
+
+Currently, most of our content is available in the following eleven languages:
+
+  * Chinese = cn
+  * Danish = da
+  * Dutch = nl
+  * English = en
+  * Finnish = fi
+  * French = fr
+  * German = de
+  * Norwegian = nb
+  * Spanish = es
+  * Swedish = sv
+  * Czech = cs
+
+If you design your application to support any other language(s), do pass the relevant [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code along in the `Accept-Language` header. If we do not have translations for your language, we will fallback to English. If we later add translations for the language, no change is required on your end to start receiving localized data.
+
+##Categories
+
+As reflected on bookboon.com, our books are organized into a hierarchy. Traversing the category tree begins here: http://bookboon.com/api/categories
+
+Categories are returned as an array of objects with properties as follows:
+
+  * `_id` : unique identifier for the category
+  * `_link` : url to the category in the api
+  * `name` : a short name for the category to be displayed in menus or the like
+  * `description` : description of the category content and purpose
+  * `homepage`: url to the category on bookboon.com
+
+
+In order to query for contents of a category, make a new request with the `id` appended to the URL. Example: http://bookboon.com/api/categories/ab0f00ac-7749-4500-a808-a16200fca2f6
+
+This will give you an expanded view of the selected category
+
+  * `name` : a short name for the category (as before)
+  * `description` : a few sentences of text introducing the category (as before)
+  * `categories` : an array of subcategories, in same format as root category listing
+  * `books` : an array of books in the category each with
+    - `_id`
+    - `_link`
+    - `title`
+    - `thumbnail`
+    - `language`
+    - `published`
+    - `abstact`
+    - `rating`
+    - `homepage`
+
+A category may contain either sub categories, books or both. The `lang` parameter will determine language of the category name and also whether to include books in that language. English will always be shown no matter the locale.
+
+##Books
+
+http://bookboon.com/api/books/add5ee13-0f5e-e011-bd88-22a08ed629e5
+
+##Search
+
+http://bookboon.com/api/search?q=austral
+
+http://bookboon.com/api/search?q=austral&lang=da
+
 
 ##User profiles
 
@@ -8,7 +70,7 @@ Only registered users can download books via the API. However, the process of re
 
 Each call to the authenticated API with handle and valid API key will either match a user profile or trigger the creation of a new profile if none exists. Calls to the authenticated API are done with HTTP Basic Authentication [RFC 2617](http://www.ietf.org/rfc/rfc2617.txt).
 
-    https://[handle]:[api_key]@api.bookboon.com/<resource-name>
+    https://[api_id]:[api_secret]@bookboon.com/api/<resource-name>
 
 The handle can be any string (max length = 64), and may contain any ASCII character, excluding a colon. Your application might already have a unique user id (eg. Facebook Profile ID), alternatively you can generate a random string during installation of the app. Whatever you pick, the important thing is to stick with it. Every authenticated request made by a specific user must include her unique handle. Two users of the same app must not use the same handle.
 
@@ -18,9 +80,9 @@ Before a newly created user is allowed to download books, you will need to help 
 
 To get the list of questions we need answered by a specific user, simply make a GET request to:
 
-    https://[handle]:[api_key]@api.bookboon.com/questions
+    https://[api_id]:[api_secret]@bookboon.com/api/questions
 
-Notice the use of HTTPS, which is required throughout the authenticated API, and remember to replace `[handle]` and `[api_key]` with the relevant values. Just as in the [public API](public), you can use the `lang` query string parameter to specify the preferred language.
+Notice the use of HTTPS, which is required throughout the authenticated API, and remember to replace `[api_id]` and `[api_secret]` with the relevant values.
 
 The request to the `/questions` resource will return an array of questions similar to this:
 
@@ -74,15 +136,11 @@ Currently, no combination of answers will generate more than five questions in t
 
 After discovering an interesting book via the [public API](public) (browsing categories or searching), you should present the user with a hard-to-miss download button/link. When activated, make an authenticated API request to the `/books/<bookid>/download` resource using the POST method:
 
-    https://[handle]:[api_key]@api.bookboon.com/books/39a1bd3e-e876-47b5-896c-9efb00dd309e/download
+    https://[api_id]:[api_secret]@bookboon.com/api/books/39a1bd3e-e876-47b5-896c-9efb00dd309e/download
 
-If everything works out, you should get a response like this:
+If everything works out, you should get a 302 redirect response to the book file 
 
-    {
-        url: "http://dl.bookboon.com/12345.pdf"
-    }
-
-Request the provided `url` to get the actual PDF file. Do not store the link, as it is intended for a one-time download only and will expire. You can expect the link to be good for at least 30 minutes, which should give you sufficient time to complete the download.
+Do not store the link, as it is intended for a one-time download only and will expire. You can expect the link to be good for at least 30 minutes, which should give you sufficient time to complete the download.
 
 If it happens that you have not yet provided us with answers for all of our questions, or if the set of questions have been changed, you will receive an answer like this (HTTP status code 403):
 
@@ -101,7 +159,7 @@ To enable developers to customize the books the download method takes two parame
 
 By looking at the download history of a specific user, we are able to make recommendations for others books that might be of interest for this user. You can retrieve a list of recommended books by doing an authenticated API request to the `/recommendations` method:
 
-    https://[handle]:[api_key]@api.bookboon.com/recommendations
+    https://[api_id]:[api_secret]@bookboon.com/api/recommendations
 
 By default we will return an array with at most five books. Use the `limit` parameter if you want a different number of books returned. Example of returned data:
 
