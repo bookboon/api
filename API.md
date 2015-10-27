@@ -126,7 +126,7 @@ Currently, no combination of answers will generate more than four questions in t
 
 After discovering an interesting book via the API (browsing categories or searching), you should present the user with a hard-to-miss download button/link. When activated, make an API request to the `/books/<bookid>/download` contain a `handle` and `answer` values resource using the POST method:
 
-    https://[api_id]:[api_secret]@bookboon.com/api/books/39a1bd3e-e876-47b5-896c-9efb00dd309e/download
+    https://bookboon.com/api/books/39a1bd3e-e876-47b5-896c-9efb00dd309e/download
 
 The `handle` can be any string (max length = 64), and may contain any ASCII character, excluding a colon. Your application might already have a unique user id (eg. Facebook Profile ID), alternatively you can generate a random string during installation of the app. Whatever you pick, the important thing is to stick with it for that user. Every authenticated request made by a specific user must include her unique handle. Two users of the same app must not use the same handle.
 
